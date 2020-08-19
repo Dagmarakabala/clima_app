@@ -1,0 +1,34 @@
+.weather
+  display: flex
+  flex-wrap: nowrap
+  align-items: stretch
+  position: relative
+  width: 100%
+  height: 100%
+  background-color: $blue-black
+  border-radius: 50px
+  color: $moon
+  
+  +max($bp-md)
+    height: 200%
+    flex-wrap: wrap
+
+  &__aside 
+    width: 40%
+    min-width: 480px
+    padding: 30px
+    border-right: 1px solid $moon
+
+    +max($bp-md)
+      width: 100%
+      padding: 30px 5px
+      border-right: 0
+      border-bottom: 1px solid $moon
+
+  &__main
+    width: 60%
+    margin:  0px auto
+    padding: 30px
+
+    +max($bp-md)
+      width: 100%
