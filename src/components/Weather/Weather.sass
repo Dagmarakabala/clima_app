@@ -4,26 +4,46 @@
   align-items: stretch
   position: relative
   width: 100%
-  height: 100%
+  height: auto
+  min-height: 100%
   background-color: $blue-black
   border-radius: 50px
   color: $moon
   
   +max($bp-md)
-    height: 200%
     flex-wrap: wrap
 
   &__aside 
+    display: flex
+    flex-direction: column
+    align-items: center
+    align-self: center
     width: 40%
-    min-width: 480px
     padding: 30px
     border-right: 1px solid $moon
 
     +max($bp-md)
+      flex-direction: row
+
+    +max($bp-xs)
+      flex-direction: column
+
+    +max($bp-md)
       width: 100%
+      min-width: 100%
       padding: 30px 5px
       border-right: 0
       border-bottom: 1px solid $moon
+
+  &__temperature
+    width: 100%
+    
+
+    +max($bp-md)
+      width: 50%
+
+    +max($bp-xs)
+      width: 100%
 
   &__main
     width: 60%

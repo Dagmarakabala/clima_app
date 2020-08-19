@@ -12,19 +12,33 @@ $(document).ready(function(){
     nextArrow: false,
     responsive: [
     {
-      breakpoint: 969,
+      breakpoint: 1340,
       settings: {
         slidesToShow: 6,
         slidesToScroll: 1,
       }
       },
       {
-      breakpoint: 610,
-      settings: {
-        slidesToShow: 3,
-        slidesToScroll: 1,
-      }
-      }
+        breakpoint: 611,
+        settings: {
+          slidesToShow: 6,
+          slidesToScroll: 1,
+        }
+        },
+        {
+          breakpoint: 520,
+          settings: {
+            slidesToShow: 4,
+            slidesToScroll: 1,
+          }
+          },
+      {
+        breakpoint: 375,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        }
+        }
   ]
 });
 });

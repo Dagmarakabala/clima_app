@@ -1,18 +1,20 @@
 .search
-  display: block
+  display: flex
+  flex-wrap: nowrap
   position: relative
+  gap: 20px
   width: 100%
   margin: 0px auto
   text-align: right
+  align-items: center
 
-  &__input 
-    display: inline
+  &__input
     width: calc(100% - 70px)
-    height: 30px
+    height: 44px
     background-color: lighten($blue-black, 5%)
     border: 0
     border-radius: 20px
+    color: $moon
 
   &__icon 
-    display: inline
-    font-size: 28px
+    font-size: 44px

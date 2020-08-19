@@ -1,14 +1,22 @@
 .emoji
+  display: flex
   position: absolute
   top: 0px
   right: 0px
   background-color: $orange
-  border-radious: 100%
   width: 70px
   height: 70px
-  border-radius: 100%
+  align-items: center
   text-align: center
+  border-radius: 100%
+  font-size: 30px
+
+  +max($bp-md)
+    width: 50px
+    height: 50px
+    font-size: 20px
 
   &__item
-    padding-top: 20px
-    font-size: 30px
+    margin: 0px auto
+    line-height: 1
+    

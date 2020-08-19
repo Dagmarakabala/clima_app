@@ -5,12 +5,23 @@
   margin: 20px auto
   text-align: center
   
+  +max($bp-md)
+    width: 50%
+
+  +max($bp-xs)
+    width: 100%
   &__title
-    font-size: 40px
+    font-size: 50px
+
+    +max($bp-xs)
+      font-size: 35px
 
   &__info
-    width: 50%
+    max-width: 65%
     margin: 20px auto
+
+    +max($bp-xs)
+      max-width: 90%
 
   &__btn
     max-width: 50%
@@ -19,3 +30,6 @@
     background-color: darken($orange, 20%)
     border-radius: 10px
     cursor: pointer
+
+    +max($bp-xs)
+      max-width: 100%
