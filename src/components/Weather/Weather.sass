@@ -13,6 +13,22 @@
   +max($bp-md)
     flex-wrap: wrap
 
+  &__loading
+    display: flex
+    position: absolute
+    top: 0
+    right: 0
+    bottom: 0
+    left: 0
+    align-items: center
+    justify-content: center
+    background-color: $blue-black
+    z-index: 1
+
+  &__loader
+    display: block
+    width: 200px
+
   &__aside 
     display: flex
     flex-direction: column
@@ -52,3 +68,6 @@
 
     +max($bp-md)
       width: 100%
+
+.-loaded
+    display: none
