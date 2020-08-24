@@ -25,9 +25,7 @@ const WeatherApp = {
   catchDOM() {
     this.$app = $('.weather');
     this.$loader = $('.weather__loading');
-    this.hourTemperatureList = [];
-    this.hourEmojiList = [];
-    this.hourItemTime = moment().format('HH');
+    
   },
   removeLoader() {
     this.$loader.addClass('-loaded');
@@ -209,8 +207,8 @@ const WeatherApp = {
         }
         else {
           if (this.hourEmojiList[i] === "Clear") {
-            if(this.hourItemTime < sunRise || this.hourItemTime > sunSet){
-              hourIcon = "🌑";
+            if(this.hourItemTime <= sunRise || this.hourItemTime > sunSet){
+              hourIcon = "🌙";
             }
             else {
               hourIcon = "☀️";
@@ -227,12 +225,89 @@ const WeatherApp = {
     }
 
   },
+  addIdea() {
+    let goodWeather = [
+      'Rozmowy o pogodzie są okrasą naszej codzienności.', 
+      'Czy może być źle, kiedy słońce świeci?',
+      'Życiem - tak jak pogodą - rządzą nieustanne zmiany.',
+      'Nie ma lepszej pogody niż pogoda ducha.',
+      'Kto ma słońce w sercu, temu pogoda za oknem nie jest do niczego potrzebna.',
+      'Chociaż Bóg jest wszechmogący, nie może zesłać deszczu, gdy niebo jest błękitne.',
+      'Wszystko, co możesz sobie wyobrazić, natura już to stworzyła.',
+      'Na każdym spacerze w naturze człowiek otrzymuje znacznie więcej niż szuka.',
+      'W naturze światło tworzy kolor. W malarstwie kolor tworzy światło.',
+      'Miłość jest jedynym kwiatem, który może kwitnąć bez pomocy pór roku.',
+      'Kwiaty wiosny to marzenia o zimie opowiadane rano przy stole aniołów.',
+      'Lato to czas, kiedy jest zbyt gorąco, aby robić rzeczy, dla których było zbyt zimno w zimie.',
+      'Zimą nie możesz się doczekać lata. Latem boisz się, że zima powróci. Właśnie dlatego nigdy nie męczysz się w pogoni za miejscem, w którym nie jesteś: gdzie zawsze jest lato. ',
+    ];
+    let ordinaryWeather = [
+      'Rozmowy o pogodzie są okrasą naszej codzienności.', 
+      'Kiedy tylko zaistnieje niebezpieczeństwo że pogoda się zepsuje Anglicy porzucają domowe zacisze i wyruszają na pieszą wycieczkę.',
+      'Życiem - tak jak pogodą - rządzą nieustanne zmiany.',
+      'Pogoda ducha najbardziej przydaje się w beznadziejnych sytuacjach.',
+      'Nie ma lepszej pogody niż pogoda ducha.',
+      'Kto ma słońce w sercu, temu pogoda za oknem nie jest do niczego potrzebna.',
+      'Ci, którzy mówią, że słońce przynosi szczęście, nigdy nie tańczyli w deszczu.',
+      'Wiatr jest przyjacielem plotek, deszcz przyjacielem uczuć, mgła przyjacielem fabuł.',
+      'Chociaż Bóg jest wszechmogący, nie może zesłać deszczu, gdy niebo jest błękitne.',
+      'Zima jest martwa, wiosna jest szalona, lato jest szczęśliwe, a jesień mądra! ',
+      'Wiosenne kwiaty to bajki, a jesienne liście to tragiczne dramaty.',
+      'Życie bez miłości jest jak rok bez lata.',
+      'Staraj się zawsze trzymać trochę nieba nad swoim życiem.',
+      'Wszyscy żyjemy pod tym samym niebem, ale nie wszyscy mamy ten sam horyzont.',
+      'Niebo może być dotknięte tylko sercem. ',
+      'Nie w gwiazdach leży nasze przeznaczenie, ale w nas samych.',
+      'Kocham gwiazdy. Ponieważ nic nie mogą powiedzieć. Kocham gwiazdy. Ponieważ nikogo nie oceniają.',
+      'Popatrz na gwiazdy. Zobacz ich piękno. I w tym pięknie zobacz siebie.',
+      'Nie byłoby nieba pełnego gwiazd, gdybyśmy wszyscy marzyli o tym samym.',
+      'Tylko w ciemnościach widać gwiazdy.',
+      'A może po prostu jak zegary słoneczne "działajmy" tylko w słoneczne dni...',
+    ];
+    let badWeather = [
+      '... nie ma złej pogody. Można się tylko nieodpowiednio ubrać.', 
+      'Rozmowy o pogodzie są okrasą naszej codzienności.',
+      'Życiem - tak jak pogodą - rządzą nieustanne zmiany.',
+      'W taką pogodę dobrze jest się powiesić.',
+      'Nie ma lepszej pogody niż pogoda ducha.',
+      'Kto ma słońce w sercu, temu pogoda za oknem nie jest do niczego potrzebna.',
+      'Ci, którzy mówią, że słońce przynosi szczęście, nigdy nie tańczyli w deszczu.',
+      'W długie deszczowe dni nawet chwile wydają się zmęczone, płyną powoli, jakby szeptały światu swój smutek.',
+      'Słońce po deszczu jest o wiele piękniejsze niż słońce przed deszczem!',
+      'Nie może padać wiecznie!',
+      'Wiatr jest przyjacielem plotek, deszcz przyjacielem uczuć, mgła przyjacielem fabuł.',
+      'Chociaż Bóg jest wszechmogący, nie może zesłać deszczu, gdy niebo jest błękitne.',
+    ];
+    if (this.hourEmojiList[0] === "Snow" || this.hourEmojiList[0] === "Rain" || this.hourEmojiList[0] === "Storm") {
+      this.actualWeather = badWeather;
+      this.img = './assets/images/Idea/img1.png';
+    }
+    else {
+      if (this.hourEmojiList[0] === "Clear") {
+        this.actualWeather = goodWeather;
+        this.img = './assets/images/Idea/img2.png';
+      }
+      else {
+        this.actualWeather = ordinaryWeather;
+        this.img = './assets/images/Idea/img3.png';
+      }
+    }
+    let actualWeatherLength = this.actualWeather.length;
+    let number = Math.floor((Math.random() * actualWeatherLength));
+    this.$ideaText = this.$app.find('.idea__text');
+    this.$ideaText.text(this.actualWeather[number]);
+    this.$ideaImg = this.$app.find('.idea__img');
+    this.$ideaImg[0].src = this.img;
+  },
   requestWeatherAPIData(lat, lon) {
     $.ajax({
         url: `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=bcbc67cd866137b29869139239475e8e`, 
         method: "GET",
         success: (weatherData) => {
           console.log(weatherData)
+          this.hourTemperatureList = [];
+          this.hourEmojiList = [];
+          this.hourItemTime = moment().format('HH');
           let cityTemperature = weatherData.current.temp;
           cityTemperature = cityTemperature-273.15;
           cityTemperature = Math.round(cityTemperature);
@@ -262,6 +337,7 @@ const WeatherApp = {
             this.hourEmojiList[i] = hourEmoji;
           }
           this.renderHourList();
+          this.addIdea();
           this.removeLoader();
         }
       
