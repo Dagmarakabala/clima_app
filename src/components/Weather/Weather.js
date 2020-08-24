@@ -25,6 +25,9 @@ const WeatherApp = {
   catchDOM() {
     this.$app = $('.weather');
     this.$loader = $('.weather__loading');
+    this.hourTemperatureList = [];
+    this.hourEmojiList = [];
+    this.hourItemTime = moment().format('HH');
   },
   removeLoader() {
     this.$loader.addClass('-loaded');
@@ -183,6 +186,41 @@ const WeatherApp = {
       }
     })
   },
+  renderHourList() {
+    for( let i = 0 ; i < 48; i++) {
+      this.$hourItemHour = this.$app.find('.hourItem__hour').eq(i);
+      this.$hourItemTemp = this.$app.find('.hourItem__temp').eq(i);
+      this.$hourItemHour.text(this.hourItemTime);
+      this.hourItemTime++;
+      console.log(this.hourEmojiList[i])
+      if (this.hourItemTime > 24) {
+        this.hourItemTime -= 24;
+      }
+      this.$hourItemTemp.text(this.hourTemperatureList[i] + "ºC");
+      let hourIcon;
+      if (this.hourEmojiList[i] === "Snow") {
+        hourIcon = "🌨";
+      }
+      else {
+        if (this.hourEmojiList[i] === "Rain") {
+          hourIcon = "🌧";
+      }
+      else {
+        if (this.hourEmojiList[i] === "Clear") {
+          hourIcon = "☀️";
+      }
+      else {
+        if (this.hourEmojiList[i] === "Storm") {
+          hourIcon = "🌩";
+      }
+      else {
+        hourIcon = "☁️";
+      }}}}
+        this.$hourEmojiDiv = this.$app.find('.hourItem__icon').eq(i);
+        this.$hourEmojiDiv.text(hourIcon);
+    }
+
+  },
   requestWeatherAPIData(lat, lon) {
     $.ajax({
         url: `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=bcbc67cd866137b29869139239475e8e`, 
@@ -203,15 +241,24 @@ const WeatherApp = {
           this.setWeatherType(cityWeatherEmoji);
           let sunRise = weatherData.current.sunrise;
           let sunSet = weatherData.current.sunset;
-          let sunRiseTime = moment.unix(sunRise).format('HH:MM')
-          let sunSetTime = moment.unix(sunSet).format('HH:MM')
+          let sunRiseTime = moment.unix(sunRise).format('hh:mm')
+          let sunSetTime = moment.unix(sunSet).format('HH:mm')
           let pressure = weatherData.current.pressure;
           let humidity = weatherData.current.humidity;
           this.setWeatherBasicInfo(humidity, pressure, sunRiseTime, sunSetTime);
           this.updateWeatherBackground();
+          for (let i = 0; i < 48; i++) {
+            let hourTemperature = weatherData.hourly[i].temp;
+            hourTemperature = hourTemperature-273.15;
+            hourTemperature = Math.round(hourTemperature);
+            this.hourTemperatureList[i] = hourTemperature;
+            let hourEmoji = weatherData.hourly[i].weather[0].main;
+            this.hourEmojiList[i] = hourEmoji;
+          }
+          this.renderHourList();
           this.removeLoader();
-          
-      }
+        }
+      
     })
   }
 

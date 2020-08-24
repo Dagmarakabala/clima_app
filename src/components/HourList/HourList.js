@@ -15,28 +15,28 @@ $(document).ready(function(){
       breakpoint: 1340,
       settings: {
         slidesToShow: 6,
-        slidesToScroll: 1,
+        slidesToScroll: 4,
       }
       },
       {
         breakpoint: 611,
         settings: {
           slidesToShow: 6,
-          slidesToScroll: 1,
+          slidesToScroll: 3,
         }
         },
         {
           breakpoint: 520,
           settings: {
             slidesToShow: 4,
-            slidesToScroll: 1,
+            slidesToScroll: 2,
           }
           },
       {
         breakpoint: 375,
         settings: {
           slidesToShow: 3,
-          slidesToScroll: 1,
+          slidesToScroll: 2,
         }
         }
   ]
