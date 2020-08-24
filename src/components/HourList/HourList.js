@@ -5,7 +5,7 @@ $(document).ready(function(){
   $('.hourList__slick').slick({
     infinite: true,
     slidesToShow: 8,
-    slidesToScroll: 1,
+    slidesToScroll: 4,
     infinite: false,
     dots: false,
     prevArrow: false,

@@ -189,35 +189,41 @@ const WeatherApp = {
   renderHourList() {
     for( let i = 0 ; i < 48; i++) {
       this.$hourItemHour = this.$app.find('.hourItem__hour').eq(i);
+      this.$hourEmojiDiv = this.$app.find('.hourItem__icon').eq(i);
       this.$hourItemTemp = this.$app.find('.hourItem__temp').eq(i);
       this.$hourItemHour.text(this.hourItemTime);
       this.hourItemTime++;
-      console.log(this.hourEmojiList[i])
       if (this.hourItemTime > 24) {
         this.hourItemTime -= 24;
       }
       this.$hourItemTemp.text(this.hourTemperatureList[i] + "ºC");
       let hourIcon;
+      let sunSet = parseInt(this.state.sunSet);
+      let sunRise = parseInt(this.state.sunRise);
       if (this.hourEmojiList[i] === "Snow") {
         hourIcon = "🌨";
       }
       else {
         if (this.hourEmojiList[i] === "Rain") {
           hourIcon = "🌧";
-      }
-      else {
-        if (this.hourEmojiList[i] === "Clear") {
-          hourIcon = "☀️";
-      }
-      else {
-        if (this.hourEmojiList[i] === "Storm") {
-          hourIcon = "🌩";
-      }
-      else {
-        hourIcon = "☁️";
+        }
+        else {
+          if (this.hourEmojiList[i] === "Clear") {
+            if(this.hourItemTime < sunRise || this.hourItemTime > sunSet){
+              hourIcon = "🌑";
+            }
+            else {
+              hourIcon = "☀️";
+            }
+          }
+          else {
+            if (this.hourEmojiList[i] === "Storm") {
+              hourIcon = "🌩";
+            }
+          else {
+            hourIcon = "☁️";
       }}}}
-        this.$hourEmojiDiv = this.$app.find('.hourItem__icon').eq(i);
-        this.$hourEmojiDiv.text(hourIcon);
+      this.$hourEmojiDiv.text(hourIcon);
     }
 
   },
