@@ -89,17 +89,21 @@ const WeatherApp = {
       if (this.state.weatherType === "Rain") {
         this.setState('weatherEmoji', "☔️");
     }
-    else {
-      if (this.state.weatherType === "Clear") {
-        this.setState('weatherEmoji', "☀️");
-    }
-    else {
-      if (this.state.weatherType === "Storm") {
-        this.setState('weatherEmoji', "⚡️");
-    }
-    else {
-      this.setState('weatherEmoji', "☁️");
-    }}}}
+      else {
+        if (this.state.weatherType === "Clear") {
+          this.setState('weatherEmoji', "☀️");
+        }
+        else {
+          if (this.state.weatherType === "Thunderstorm") {
+            this.setState('weatherEmoji', "⚡️");
+          }
+          else {
+            if(this.state.weatherType === "Drizzle") {
+              this.setState('weatherEmoji', "🌦");
+            }
+            else {
+              this.setState('weatherEmoji', "☁️");
+    }}}}}
       this.$emojiDiv = this.$app.find('.emoji__item');
       const emoji = this.getState('weatherEmoji');
       this.$emojiDiv.text(emoji);
@@ -222,12 +226,16 @@ const WeatherApp = {
             }
           }
           else {
-            if (this.hourEmojiList[i] === "Storm") {
+            if (this.hourEmojiList[i] === "Thunderstorm") {
               hourIcon = "🌩";
             }
-          else {
-            hourIcon = "☁️";
-      }}}}
+            else {
+              if (this.hourEmojiList[i] === "Drizzle") {
+                hourIcon = "🌦";
+              }
+              else {
+                hourIcon = "☁️";
+      }}}}}
       this.$hourEmojiDiv.text(hourIcon);
     }
 
@@ -285,7 +293,7 @@ const WeatherApp = {
       'Wiatr jest przyjacielem plotek, deszcz przyjacielem uczuć, mgła przyjacielem fabuł.',
       'Chociaż Bóg jest wszechmogący, nie może zesłać deszczu, gdy niebo jest błękitne.',
     ];
-    if (this.hourEmojiList[0] === "Snow" || this.hourEmojiList[0] === "Rain" || this.hourEmojiList[0] === "Storm") {
+    if (this.hourEmojiList[0] === "Snow" || this.hourEmojiList[0] === "Rain" || this.hourEmojiList[0] === "Thunderstorm") {
       this.actualWeather = badWeather;
       this.img = './assets/images/Idea/img1.png';
     }
