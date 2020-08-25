@@ -189,11 +189,18 @@ const WeatherApp = {
       this.$hourItemHour = this.$app.find('.hourItem__hour').eq(i);
       this.$hourEmojiDiv = this.$app.find('.hourItem__icon').eq(i);
       this.$hourItemTemp = this.$app.find('.hourItem__temp').eq(i);
-      this.$hourItemHour.text(this.hourItemTime);
+      this.hourItemTime = this.hourItemTime.toString()
+      if (this.hourItemTime.length == 1) {
+        this.$hourItemHour.text("0" + this.hourItemTime);
+      }
+      else {
+        this.$hourItemHour.text(this.hourItemTime);
+      }
       this.hourItemTime++;
       if (this.hourItemTime > 24) {
         this.hourItemTime -= 24;
       }
+      
       this.$hourItemTemp.text(this.hourTemperatureList[i] + "ºC");
       let hourIcon;
       let sunSet = parseInt(this.state.sunSet);
@@ -340,7 +347,6 @@ const WeatherApp = {
           this.addIdea();
           this.removeLoader();
         }
-      
     })
   }
 
